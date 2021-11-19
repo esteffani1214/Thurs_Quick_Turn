@@ -1,0 +1,54 @@
+---
+title: "Wed_Inclass"
+author: "Esteffani Maldonado"
+date: "11/17/2021"
+output: html_document
+---
+
+# This is a quick-turn challenge.  It relates to Question 2 of Quiz 8 in our course. Take a look at that quiz question and then.
+
+## The researchers wanted to know if the spiders could run faster, on average, without the hindrance of a pedipalp
+
+### Finish this writeUp and knit the result to a pdf file.  
+
+
+### Then add this to your github account and turn it in by emailing me the link to it in your github account,
+
+
+
+```{r, message=FALSE}
+require(tidyverse)
+require(tigerstats)
+require(abd)
+data("SpiderSpeed")
+```
+
+```{r, eval=TRUE}
+#mydata <- gather(SpiderSpeed, variable, value) 
+dat <- gather(SpiderSpeed, BorA, speed)
+```
+
+```{r}
+boxplot(speed~BorA,data = dat , main = "Speed_BorA")
+```
+  
+In the boxplot, we can see that the speed.after is higher compared to speed.before, indicating that the speed of the spiders had increased after they had their pedipalps removed.
+  
+# Numerical Results
+  
+```{r}
+favstats(speed~BorA,data=dat)
+```  
+   
+The mean speed of the spiders after having their pedipalps removed increased from the mean before. The mean for after is about 3.85, and the speed for before was 2.67.
+ 
+ 
+# Inferential Results
+
+```{r}
+t.test(speed~BorA,data=dat)
+```
+  
+From the t-test, we can see that the p-value is 0.0004611. This is a very small value, meaning that there is definitely a difference in the speed of the spiders before their pedipalps were removed and the speed of the spiders after they were removed. The 95% confidence interval is about 0.578 to 1.793. 
+  
+
